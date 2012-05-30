@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="rewardText" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">35px</item>
+        <item name="android:textColor">@color/reward_text</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="logoText" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">35px</item>
+        <item name="android:textColor">@color/logo_text</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="messageText" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">25px</item>
+        <item name="android:textColor">@color/normal_text</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="boardText" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">25px</item>
+        <item name="android:textColor">@color/normal_text</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="button" parent="@android:style/Widget.Button">
+        <item name="android:textSize">25px</item>
+        <item name="android:textColor">@color/normal_text</item>
+        <item name="android:background">@drawable/button</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">fill_parent</item>
+    </style>
+
+    <style name="debugButton">
+        <item name="android:textSize">10px</item>
+        <item name="android:textColor">@color/normal_text</item>
+        <item name="android:background">@drawable/button</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">fill_parent</item>
+    </style>
+
+</resources>

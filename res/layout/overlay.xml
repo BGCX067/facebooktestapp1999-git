@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="0dip"
+    android:weightSum="1" >
+
+    <LinearLayout
+        android:id="@+id/top"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="0.15"
+        android:background="@color/overlay_black"
+        android:orientation="vertical"
+        android:weightSum="1" >
+
+        <FrameLayout
+            android:id="@+id/logoRow"
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:visibility="visible" >
+
+            <TextView
+                android:id="@+id/logoText"
+                style="@style/logoText"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="10dp"
+                android:text="REWARD:)" />
+
+            <TextView
+                android:id="@+id/rewardText"
+                style="@style/rewardText"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:text="5 check-ins for a free beer" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/mid"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="0.7" >
+
+        <LinearLayout
+            android:id="@+id/userLayer"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/signupLayer"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/faceLayer"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:weightSum="1" >
+
+            <FrameLayout
+                android:id="@+id/midLeft"
+                android:layout_width="0dip"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.3"
+                android:background="@color/overlay_black" >
+
+                <LinearLayout
+                    android:id="@+id/board"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp" >
+
+                    <TextView
+                        android:id="@+id/boardMessage"
+                        style="@style/boardText"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:gravity="center"
+                        android:text="Today&apos;s special: martini $5" />
+
+                    <ImageView
+                        android:id="@+id/boardImage"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:adjustViewBounds="true"
+                        android:alpha="0.2"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/sample_image" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/midMid"
+                android:layout_width="0dip"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.4" >
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" >
+
+                    <TextView
+                        android:id="@+id/messageText"
+                        style="@style/messageText"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:gravity="center_horizontal|top"
+                        android:text="scan face for reward" />
+
+                    <ImageView
+                        android:id="@+id/scanLine"
+                        android:layout_width="59px"
+                        android:layout_height="fill_parent"
+                        android:layout_alignParentLeft="true"
+                        android:background="@drawable/scan_line"
+                        android:visibility="gone" />
+                </RelativeLayout>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/midRight"
+                android:layout_width="0dip"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.3"
+                android:background="@color/overlay_black" >
+
+                <LinearLayout
+                    android:id="@+id/debug"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical" >
+
+                    <Button
+                        android:id="@+id/saveLocal"
+                        style="@style/debugButton"
+                        android:text="save"
+                        android:visibility="visible" />
+
+                    <Button
+                        android:id="@+id/trainNextFace"
+                        style="@style/debugButton"
+                        android:text="train" />
+
+                    <EditText
+                        android:id="@+id/userIdToTrain"
+                        style="@style/debugButton"
+                        android:hint="user name to train for" />
+
+                    <TextView
+                        android:id="@+id/result"
+                        style="@style/debugButton" />
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_margin="0dip"
+        android:layout_weight="0.15"
+        android:background="@color/overlay_black"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="0dip"
+        android:weightSum="1" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dip"
+            android:layout_weight="0.1" />
+
+        <Button
+            android:id="@+id/firstTimeUserButton"
+            style="@style/button"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.35"
+            android:text="first time user" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dip"
+            android:layout_weight="0.1" />
+
+        <Button
+            android:id="@+id/checkinWithEmailButton"
+            style="@style/button"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.35"
+            android:text="checkin with email" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dip"
+            android:layout_weight="0.1" />
+    </LinearLayout>
+
+</LinearLayout>
