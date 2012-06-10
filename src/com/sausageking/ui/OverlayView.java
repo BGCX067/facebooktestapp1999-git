@@ -2,6 +2,7 @@ package com.sausageking.ui;
 
 import android.graphics.RectF;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.sausageking.capture.FrameProcessor;
 import com.sausageking.model.User;
@@ -15,13 +16,17 @@ public interface OverlayView {
 
   RectF getFaceArea();
 
-  void setToRecognitionMode();
+  void setToRecognitionView();
 
-  void setToUserMode(User user);
+  void setToUserView(User user);
 
-  void setToSignupMode();
+  void setToSignupView();
 
-  void setToTraningMode(User user);
+  void setToTraningView(User user);
+
+  ViewGroup getUserViewRoot();
+
+  ViewGroup getScanningViewRoot();
 
   interface Presenter {
 
@@ -41,13 +46,12 @@ public interface OverlayView {
 
     void setResult(String userId);
 
-    void setToRecognitionMode();
+    void setToRecognitionView();
 
-    void setToUserMode(String userId);
+    void setToUserView(String userId);
 
-    void setToSignupMode();
-
-    void setToTraningMode(String userId);
+    void setUserPresenter(UserView.Presenter userPresenter);
 
   }
+
 }

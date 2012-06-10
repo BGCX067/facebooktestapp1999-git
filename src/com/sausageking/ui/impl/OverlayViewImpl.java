@@ -33,7 +33,10 @@ public class OverlayViewImpl implements OverlayView {
   private final ImageView scanLine;
   private final View midMiddle;
   private final View mid;
+  private final ImageView boardImage;
   private boolean scanLineMoving = false;
+  private final ViewGroup userRoot;
+  private final ViewGroup scanningRoot;
 
   public OverlayViewImpl(final Context context, ViewGroup root,
       final Presenter presenter) {
@@ -50,8 +53,11 @@ public class OverlayViewImpl implements OverlayView {
     result = (TextView) view.findViewById(R.id.result);
     this.presenter = presenter;
     midMiddle = view.findViewById(R.id.midMid);
+    userRoot = (ViewGroup) view.findViewById(R.id.userRoot);
+    scanningRoot = (ViewGroup) view.findViewById(R.id.mid);
     mid = view.findViewById(R.id.mid);
     scanLine = (ImageView) view.findViewById(R.id.scanLine);
+    boardImage = (ImageView) view.findViewById(R.id.boardImage);
     saveLocalButton.setOnClickListener(new View.OnClickListener() {
 
       @Override
@@ -150,26 +156,49 @@ public class OverlayViewImpl implements OverlayView {
   }
 
   @Override
-  public void setToRecognitionMode() {
+  public void setToRecognitionView() {
+    handler.post(new Runnable() {
+
+      @Override
+      public void run() {
+        getUserViewRoot().setVisibility(View.GONE);
+        getScanningViewRoot().setVisibility(View.VISIBLE);
+
+      }
+    });
+
+  }
+
+  @Override
+  public void setToUserView(User user) {
+    handler.post(new Runnable() {
+      @Override
+      public void run() {
+        getUserViewRoot().setVisibility(View.VISIBLE);
+        getScanningViewRoot().setVisibility(View.GONE);
+      }
+    });
+  }
+
+  @Override
+  public void setToSignupView() {
+    // TODO Auto-generated method stub
+  }
+
+  @Override
+  public void setToTraningView(User user) {
     // TODO Auto-generated method stub
 
   }
 
   @Override
-  public void setToUserMode(User user) {
-    // TODO Auto-generated method stub
-
+  public ViewGroup getUserViewRoot() {
+    return userRoot;
   }
 
   @Override
-  public void setToSignupMode() {
-    // TODO Auto-generated method stub
-
+  public ViewGroup getScanningViewRoot() {
+    return scanningRoot;
   }
 
-  @Override
-  public void setToTraningMode(User user) {
-    // TODO Auto-generated method stub
-
-  }
 }

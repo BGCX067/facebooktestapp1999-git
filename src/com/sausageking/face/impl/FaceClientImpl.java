@@ -61,7 +61,13 @@ public class FaceClientImpl implements FaceClient {
   public Guess recognize(File imageFile) throws FaceClientException,
       FaceServerException {
     long start = System.currentTimeMillis();
-    Photo photo = apiClient.recognize(imageFile, "all@" + domain);
+    Photo photo;
+    try {
+      photo = apiClient.recognize(imageFile, "all@" + domain);
+    } catch (FaceServerException e) {
+      e.printStackTrace();
+      return null;
+    }
     Log.d(TAG, "recognition time:" + (System.currentTimeMillis() - start));
     Face mostLikelyFace = photo.getFace();
     if (mostLikelyFace != null

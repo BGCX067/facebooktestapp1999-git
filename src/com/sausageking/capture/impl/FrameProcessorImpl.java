@@ -204,6 +204,8 @@ public class FrameProcessorImpl implements FrameProcessor {
         if (trigger.shouldTrigger(userId)) {
           FrameProcessorImpl.this.overlayPresenter.setResult(userId
               + " confirmed");
+          setIdleMode();
+          overlayPresenter.setToUserView(userId);
         }
       } else {
         FrameProcessorImpl.this.overlayPresenter

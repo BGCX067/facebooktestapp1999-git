@@ -5,13 +5,16 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.sausageking.capture.FrameProcessor;
+import com.sausageking.model.User;
 import com.sausageking.ui.OverlayView;
 import com.sausageking.ui.OverlayView.Presenter;
+import com.sausageking.ui.UserView;
 
 public class OverlayPresenterImpl extends Thread implements Presenter {
   private OverlayView view;
   private Handler handler;
   private FrameProcessor frameProcessor;
+  private UserView.Presenter userPresenter;
 
   @Override
   public void setFrameProcessor(FrameProcessor processor) {
@@ -62,26 +65,18 @@ public class OverlayPresenterImpl extends Thread implements Presenter {
   }
 
   @Override
-  public void setToRecognitionMode() {
-    // TODO Auto-generated method stub
-
+  public void setToRecognitionView() {
+    setToRecognitionView();
   }
 
   @Override
-  public void setToUserMode(String userId) {
-    // TODO Auto-generated method stub
-
+  public void setToUserView(String userId) {
+    view.setToUserView(new User(1, userId, null, null));
   }
 
   @Override
-  public void setToSignupMode() {
-    // TODO Auto-generated method stub
-
-  }
-
-  @Override
-  public void setToTraningMode(String userId) {
-    // TODO Auto-generated method stub
-
+  public void setUserPresenter(
+      com.sausageking.ui.UserView.Presenter userPresenter) {
+    this.userPresenter = userPresenter;
   }
 }

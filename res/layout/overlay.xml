@@ -43,135 +43,123 @@
         </FrameLayout>
     </LinearLayout>
 
-    <FrameLayout
+    <LinearLayout
+        android:id="@+id/userRoot"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="0.7"
+        android:visibility="gone" >
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/mid"
         android:layout_width="fill_parent"
         android:layout_height="0dip"
-        android:layout_weight="0.7" >
+        android:layout_weight="0.7"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        android:weightSum="1" >
 
-        <LinearLayout
-            android:id="@+id/userLayer"
-            android:layout_width="fill_parent"
+        <FrameLayout
+            android:id="@+id/midLeft"
+            android:layout_width="0dip"
             android:layout_height="fill_parent"
-            android:orientation="horizontal"
-            android:visibility="gone" />
+            android:layout_weight="0.3"
+            android:background="@color/overlay_black" >
 
-        <LinearLayout
-            android:id="@+id/signupLayer"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="horizontal"
-            android:visibility="gone" />
-
-        <LinearLayout
-            android:id="@+id/faceLayer"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="horizontal"
-            android:visibility="visible"
-            android:weightSum="1" >
-
-            <FrameLayout
-                android:id="@+id/midLeft"
-                android:layout_width="0dip"
+            <LinearLayout
+                android:id="@+id/board"
+                android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="0.3"
-                android:background="@color/overlay_black" >
+                android:gravity="bottom"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" >
 
-                <LinearLayout
-                    android:id="@+id/board"
+                <TextView
+                    android:id="@+id/boardMessage"
+                    style="@style/boardText"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:text="Today&apos;s special: martini $5" />
+
+                <ImageView
+                    android:id="@+id/boardImage"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:gravity="bottom"
-                    android:orientation="vertical"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp" >
+                    android:adjustViewBounds="true"
+                    android:alpha="0.2"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/sample_image" />
+            </LinearLayout>
+        </FrameLayout>
 
-                    <TextView
-                        android:id="@+id/boardMessage"
-                        style="@style/boardText"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:gravity="center"
-                        android:text="Today&apos;s special: martini $5" />
+        <FrameLayout
+            android:id="@+id/midMid"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.4" >
 
-                    <ImageView
-                        android:id="@+id/boardImage"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:adjustViewBounds="true"
-                        android:alpha="0.2"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/sample_image" />
-                </LinearLayout>
-            </FrameLayout>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
 
-            <FrameLayout
-                android:id="@+id/midMid"
-                android:layout_width="0dip"
-                android:layout_height="fill_parent"
-                android:layout_weight="0.4" >
-
-                <RelativeLayout
+                <TextView
+                    android:id="@+id/messageText"
+                    style="@style/messageText"
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent" >
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center_horizontal|top"
+                    android:text="scan face for reward" />
 
-                    <TextView
-                        android:id="@+id/messageText"
-                        style="@style/messageText"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:gravity="center_horizontal|top"
-                        android:text="scan face for reward" />
-
-                    <ImageView
-                        android:id="@+id/scanLine"
-                        android:layout_width="59px"
-                        android:layout_height="fill_parent"
-                        android:layout_alignParentLeft="true"
-                        android:background="@drawable/scan_line"
-                        android:visibility="gone" />
-                </RelativeLayout>
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/midRight"
-                android:layout_width="0dip"
-                android:layout_height="fill_parent"
-                android:layout_weight="0.3"
-                android:background="@color/overlay_black" >
-
-                <LinearLayout
-                    android:id="@+id/debug"
-                    android:layout_width="fill_parent"
+                <ImageView
+                    android:id="@+id/scanLine"
+                    android:layout_width="59px"
                     android:layout_height="fill_parent"
-                    android:orientation="vertical" >
+                    android:layout_alignParentLeft="true"
+                    android:background="@drawable/scan_line"
+                    android:visibility="gone" />
+            </RelativeLayout>
+        </FrameLayout>
 
-                    <Button
-                        android:id="@+id/saveLocal"
-                        style="@style/debugButton"
-                        android:text="save"
-                        android:visibility="visible" />
+        <FrameLayout
+            android:id="@+id/midRight"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.3"
+            android:background="@color/overlay_black" >
 
-                    <Button
-                        android:id="@+id/trainNextFace"
-                        style="@style/debugButton"
-                        android:text="train" />
+            <LinearLayout
+                android:id="@+id/debug"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical" >
 
-                    <EditText
-                        android:id="@+id/userIdToTrain"
-                        style="@style/debugButton"
-                        android:hint="user name to train for" />
+                <Button
+                    android:id="@+id/saveLocal"
+                    style="@style/debugButton"
+                    android:text="save"
+                    android:visibility="visible" />
 
-                    <TextView
-                        android:id="@+id/result"
-                        style="@style/debugButton" />
-                </LinearLayout>
-            </FrameLayout>
-        </LinearLayout>
-    </FrameLayout>
+                <Button
+                    android:id="@+id/trainNextFace"
+                    style="@style/debugButton"
+                    android:text="train" />
+
+                <EditText
+                    android:id="@+id/userIdToTrain"
+                    style="@style/debugButton"
+                    android:hint="user name to train for" />
+
+                <TextView
+                    android:id="@+id/result"
+                    style="@style/debugButton" />
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/bottom"
