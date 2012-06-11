@@ -50,7 +50,7 @@ public class FaceActivity extends Activity {
     UserView userView = new UserViewImpl(this, userPresenter, overlayView);
 
     FrameProcessor frameProcessor = new FrameProcessorImpl(cameraManager,
-        overlayPresenter, cameraPreviewPresenter, faceClient);
+        overlayPresenter, cameraPreviewPresenter, userPresenter, faceClient);
     cameraPreviewPresenter.addFrameProcessor(frameProcessor);
     CameraPreviewView cameraPreviewView = new CameraPreviewViewImpl(this,
         cameraPreviewPresenter);

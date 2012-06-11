@@ -52,7 +52,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/mid"
+        android:id="@+id/scanningRoot"
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_weight="0.7"
@@ -61,7 +61,7 @@
         android:weightSum="1" >
 
         <FrameLayout
-            android:id="@+id/midLeft"
+            android:id="@+id/leftToBoundingBox"
             android:layout_width="0dip"
             android:layout_height="fill_parent"
             android:layout_weight="0.3"
@@ -97,7 +97,7 @@
         </FrameLayout>
 
         <FrameLayout
-            android:id="@+id/midMid"
+            android:id="@+id/boundingBox"
             android:layout_width="0dip"
             android:layout_height="fill_parent"
             android:layout_weight="0.4" >
@@ -126,7 +126,7 @@
         </FrameLayout>
 
         <FrameLayout
-            android:id="@+id/midRight"
+            android:id="@+id/rightToBoundingBox"
             android:layout_width="0dip"
             android:layout_height="fill_parent"
             android:layout_weight="0.3"
@@ -180,7 +180,7 @@
 
         <Button
             android:id="@+id/firstTimeUserButton"
-            style="@style/button"
+            style="@style/normalButton"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="0.35"
@@ -193,7 +193,7 @@
 
         <Button
             android:id="@+id/checkinWithEmailButton"
-            style="@style/button"
+            style="@style/normalButton"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="0.35"

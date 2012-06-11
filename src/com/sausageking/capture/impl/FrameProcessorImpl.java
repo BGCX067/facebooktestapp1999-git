@@ -35,8 +35,10 @@ import com.github.mhendred.face4j.model.Guess;
 import com.sausageking.capture.CameraManager;
 import com.sausageking.capture.FrameProcessor;
 import com.sausageking.face.FaceClient;
+import com.sausageking.model.User;
 import com.sausageking.ui.CameraPreviewView;
 import com.sausageking.ui.OverlayView;
+import com.sausageking.ui.UserView;
 
 public class FrameProcessorImpl implements FrameProcessor {
   private static final String TAG = FrameProcessorImpl.class.getSimpleName();
@@ -46,8 +48,9 @@ public class FrameProcessorImpl implements FrameProcessor {
   private final AtomicLong lastTaskTime;
   private final CameraManager cameraManager;
   private final OverlayView.Presenter overlayPresenter;
+  private final UserView.Presenter userPresenter;
   private final CameraPreviewView.Presenter cameraPreviewPresenter;
-  private final UserRecognitionTrigger trigger;
+  private final UserModeTrigger userModeTrigger;
   private final FaceClient faceClient;
   private int nextNFacesForTraining;
   private Mode mode;
@@ -59,20 +62,23 @@ public class FrameProcessorImpl implements FrameProcessor {
 
   public FrameProcessorImpl(CameraManager cameraManager,
       OverlayView.Presenter overlayPresenter,
-      CameraPreviewView.Presenter cameraPreviewPresenter, FaceClient faceClient) {
+      CameraPreviewView.Presenter cameraPreviewPresenter,
+      UserView.Presenter userPresenter, FaceClient faceClient) {
     this(cameraManager, 1000, 1, 1, 100, 1, overlayPresenter,
-        cameraPreviewPresenter, faceClient);
+        cameraPreviewPresenter, userPresenter, faceClient);
   }
 
   public FrameProcessorImpl(CameraManager cameraManager,
       int minProcessIntervalInMs, int taskPoolCoreSize, int taskPoolMaxSize,
       int keepIdleAliveTime, int taskQueueMaxSize,
       OverlayView.Presenter overlayPresenter,
-      CameraPreviewView.Presenter cameraPreviewPresenter, FaceClient faceClient) {
+      CameraPreviewView.Presenter cameraPreviewPresenter,
+      UserView.Presenter userPresenter, FaceClient faceClient) {
     this.faceClient = faceClient;
     this.cameraManager = cameraManager;
     this.minProcessIntervalInMs = minProcessIntervalInMs;
     this.overlayPresenter = overlayPresenter;
+    this.userPresenter = userPresenter;
     overlayPresenter.setFrameProcessor(this);
     this.cameraPreviewPresenter = cameraPreviewPresenter;
     mode = Mode.RECOGNITION;
@@ -81,7 +87,7 @@ public class FrameProcessorImpl implements FrameProcessor {
         keepIdleAliveTime, TimeUnit.MILLISECONDS,
         new ArrayBlockingQueue<Runnable>(taskQueueMaxSize),
         new DiscardOldestPolicy());
-    trigger = new UserRecognitionTrigger(3, 15 * 1000);
+    userModeTrigger = new UserModeTrigger(3, 15 * 1000);
   }
 
   @Override
@@ -185,10 +191,14 @@ public class FrameProcessorImpl implements FrameProcessor {
     float eyeDistance = face.eyesDistance();
     PointF midPoint = new PointF();
     face.getMidPoint(midPoint);
-    RectF faceRect = new RectF(midPoint.x - eyeDistance, midPoint.y
-        - eyeDistance, midPoint.x + eyeDistance, midPoint.y
-        + (float) (eyeDistance * 1.39));
-    return new RectF(0, 0, width, height).contains(faceRect);
+    RectF faceRect = new RectF((float) (midPoint.x - 1.2 * eyeDistance),
+        (float) (midPoint.y - 1.2 * eyeDistance),
+        (float) (midPoint.x + 1.2 * eyeDistance), midPoint.y
+            + (float) (eyeDistance * 1.59));
+    long faceArea = (int) faceRect.width() * (int) faceRect.height();
+    long boundingBoxArea = width * height;
+    boolean faceCloseEnough = faceArea >= boundingBoxArea * 0.6;
+    return new RectF(0, 0, width, height).contains(faceRect) && faceCloseEnough;
   }
 
   private void recognize(byte[] jpegBytes) {
@@ -201,11 +211,14 @@ public class FrameProcessorImpl implements FrameProcessor {
         userId = userId.substring(0, userId.indexOf("@"));
         FrameProcessorImpl.this.overlayPresenter.setResult(userId
             + " (confidence: " + guess.getConfidence() + ")");
-        if (trigger.shouldTrigger(userId)) {
+        if (userModeTrigger.shouldTrigger(userId)) {
           FrameProcessorImpl.this.overlayPresenter.setResult(userId
               + " confirmed");
           setIdleMode();
-          overlayPresenter.setToUserView(userId);
+          Bitmap profileImage = BitmapFactory.decodeFile(file.getPath());
+          overlayPresenter.setToUserView();
+          userPresenter.setToConfirmUserMode(new User(1, userId, profileImage,
+              null));
         }
       } else {
         FrameProcessorImpl.this.overlayPresenter
@@ -252,7 +265,6 @@ public class FrameProcessorImpl implements FrameProcessor {
         }
       }
     }
-
   }
 
   private File saveFrame(byte[] jpegBytes) throws IOException {
@@ -284,8 +296,6 @@ public class FrameProcessorImpl implements FrameProcessor {
   }
 
   private FaceDetector getFaceDetector(int width, int height) {
-    Point previewSize = cameraManager.getPreviewSize();
-
     Pair<Integer, Integer> key = new Pair<Integer, Integer>(width, height);
     FaceDetector faceDetector;
     if (widthHeightToFaceDetectorMap.containsKey(key)) {
@@ -342,7 +352,7 @@ public class FrameProcessorImpl implements FrameProcessor {
     return rect;
   }
 
-  class UserRecognitionTrigger {
+  class UserModeTrigger {
     private final int minConsecutiveHit;
     private final long maxTimeForLastNHitInMs;
 
@@ -350,8 +360,7 @@ public class FrameProcessorImpl implements FrameProcessor {
     private int consecutiveUserHit;
     private List<Long> hitTime;
 
-    public UserRecognitionTrigger(int minConsecutiveHit,
-        long maxTimeForLastNHitInMs) {
+    public UserModeTrigger(int minConsecutiveHit, long maxTimeForLastNHitInMs) {
       this.maxTimeForLastNHitInMs = maxTimeForLastNHitInMs;
       this.minConsecutiveHit = minConsecutiveHit;
       consecutiveUserHit = 0;

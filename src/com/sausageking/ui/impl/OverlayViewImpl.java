@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sausageking.R;
-import com.sausageking.model.User;
 import com.sausageking.ui.OverlayView;
 
 public class OverlayViewImpl implements OverlayView {
@@ -29,10 +28,8 @@ public class OverlayViewImpl implements OverlayView {
   private final TextView result;
   private final Context context;
   private final Typeface font;
-  private final Typeface handWritingFont;
   private final ImageView scanLine;
-  private final View midMiddle;
-  private final View mid;
+  private final View boundingBox;
   private final ImageView boardImage;
   private boolean scanLineMoving = false;
   private final ViewGroup userRoot;
@@ -42,8 +39,6 @@ public class OverlayViewImpl implements OverlayView {
       final Presenter presenter) {
     this.context = context;
     font = Typeface.createFromAsset(context.getAssets(), "GeosansLight.ttf");
-    handWritingFont = Typeface.createFromAsset(context.getAssets(),
-        "aescrawl.ttf");
     handler = new Handler();
     view = LayoutInflater.from(context).inflate(R.layout.overlay, root, false);
     setFont(view);
@@ -52,10 +47,9 @@ public class OverlayViewImpl implements OverlayView {
     userIdToTrain = (EditText) view.findViewById(R.id.userIdToTrain);
     result = (TextView) view.findViewById(R.id.result);
     this.presenter = presenter;
-    midMiddle = view.findViewById(R.id.midMid);
+    boundingBox = view.findViewById(R.id.boundingBox);
     userRoot = (ViewGroup) view.findViewById(R.id.userRoot);
-    scanningRoot = (ViewGroup) view.findViewById(R.id.mid);
-    mid = view.findViewById(R.id.mid);
+    scanningRoot = (ViewGroup) view.findViewById(R.id.scanningRoot);
     scanLine = (ImageView) view.findViewById(R.id.scanLine);
     boardImage = (ImageView) view.findViewById(R.id.boardImage);
     saveLocalButton.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +91,7 @@ public class OverlayViewImpl implements OverlayView {
         scanLine.setX(-59);
         scanLine.setVisibility(View.VISIBLE);
         ObjectAnimator animation = ObjectAnimator.ofFloat(scanLine, "x",
-            midMiddle.getRight());
+            boundingBox.getRight());
 
         animation.setDuration(900);
         animation.start();
@@ -151,8 +145,8 @@ public class OverlayViewImpl implements OverlayView {
 
   @Override
   public RectF getFaceArea() {
-    return new RectF(midMiddle.getLeft(), mid.getTop(), midMiddle.getRight(),
-        mid.getBottom());
+    return new RectF(boundingBox.getLeft(), scanningRoot.getTop(),
+        boundingBox.getRight(), scanningRoot.getBottom());
   }
 
   @Override
@@ -170,7 +164,7 @@ public class OverlayViewImpl implements OverlayView {
   }
 
   @Override
-  public void setToUserView(User user) {
+  public void setToUserView() {
     handler.post(new Runnable() {
       @Override
       public void run() {
@@ -186,9 +180,8 @@ public class OverlayViewImpl implements OverlayView {
   }
 
   @Override
-  public void setToTraningView(User user) {
+  public void setToTraningView() {
     // TODO Auto-generated method stub
-
   }
 
   @Override

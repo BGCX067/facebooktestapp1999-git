@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.sausageking.capture.FrameProcessor;
-import com.sausageking.model.User;
 import com.sausageking.ui.OverlayView;
 import com.sausageking.ui.OverlayView.Presenter;
 import com.sausageking.ui.UserView;
@@ -70,8 +69,8 @@ public class OverlayPresenterImpl extends Thread implements Presenter {
   }
 
   @Override
-  public void setToUserView(String userId) {
-    view.setToUserView(new User(1, userId, null, null));
+  public void setToUserView() {
+    view.setToUserView();
   }
 
   @Override

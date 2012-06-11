@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sausageking.capture.FrameProcessor;
-import com.sausageking.model.User;
 
 public interface OverlayView {
   View toView();
@@ -18,11 +17,11 @@ public interface OverlayView {
 
   void setToRecognitionView();
 
-  void setToUserView(User user);
+  void setToUserView();
 
   void setToSignupView();
 
-  void setToTraningView(User user);
+  void setToTraningView();
 
   ViewGroup getUserViewRoot();
 
@@ -48,10 +47,11 @@ public interface OverlayView {
 
     void setToRecognitionView();
 
-    void setToUserView(String userId);
+    void setToUserView();
 
     void setUserPresenter(UserView.Presenter userPresenter);
 
   }
+
 
 }
