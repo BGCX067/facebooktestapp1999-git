@@ -157,7 +157,6 @@ public class OverlayViewImpl implements OverlayView {
       public void run() {
         getUserViewRoot().setVisibility(View.GONE);
         getScanningViewRoot().setVisibility(View.VISIBLE);
-
       }
     });
 

@@ -142,21 +142,22 @@
                     android:id="@+id/saveLocal"
                     style="@style/debugButton"
                     android:text="save"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/trainNextFace"
                     style="@style/debugButton"
-                    android:text="train" />
+                    android:text="Train for new user" />
 
                 <EditText
                     android:id="@+id/userIdToTrain"
                     style="@style/debugButton"
-                    android:hint="user name to train for" />
+                    android:hint="user name" />
 
                 <TextView
                     android:id="@+id/result"
-                    style="@style/debugButton" />
+                    style="@style/debugText" 
+                    android:visibility="visible"/>
             </LinearLayout>
         </FrameLayout>
     </LinearLayout>

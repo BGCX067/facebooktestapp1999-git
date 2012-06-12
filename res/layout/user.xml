@@ -23,7 +23,7 @@
 
         <TextView
             android:id="@+id/name"
-            style="@style/NormalTextOnWhiteBG"
+            style="@style/LargeTextOnWhiteBG"
             android:layout_width="fill_parent"
             android:layout_height="0dip"
             android:layout_weight="0.2"
@@ -47,17 +47,17 @@
 
                 <Button
                     android:id="@+id/thatsMeButton"
-                    style="@style/normalButtonOnWhiteBG"
+                    style="@style/highlightedButtonOnWhiteBG"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="That&apos;s me!" />
+                    android:text="Get reward points!" />
 
                 <Button
                     android:id="@+id/tryAgainButton"
-                    style="@style/normalButtonOnWhiteBG"
+                    style="@style/lowlightedButtonOnWhiteBG"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="Try again" />
+                    android:text="Not me, try again" />
             </LinearLayout>
 
             <LinearLayout

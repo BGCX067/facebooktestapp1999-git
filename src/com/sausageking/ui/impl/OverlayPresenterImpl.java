@@ -65,7 +65,8 @@ public class OverlayPresenterImpl extends Thread implements Presenter {
 
   @Override
   public void setToRecognitionView() {
-    setToRecognitionView();
+    view.setToRecognitionView();
+    frameProcessor.setRecognitionMode();
   }
 
   @Override

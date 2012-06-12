@@ -31,6 +31,8 @@ public interface UserView {
     void setToRedeemableMode(User user);
 
     void setToRedeemingMode(User user);
+
+    OverlayView.Presenter getOverlayPresenter();
   }
 
   enum Mode {

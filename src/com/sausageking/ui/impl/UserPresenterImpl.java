@@ -53,4 +53,8 @@ public class UserPresenterImpl implements Presenter {
     view.setToRedeemingMode(user);
   }
 
+  @Override
+  public OverlayView.Presenter getOverlayPresenter() {
+    return overlayPresenter;
+  }
 }

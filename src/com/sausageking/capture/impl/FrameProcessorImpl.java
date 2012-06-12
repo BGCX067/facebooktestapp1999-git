@@ -87,7 +87,7 @@ public class FrameProcessorImpl implements FrameProcessor {
         keepIdleAliveTime, TimeUnit.MILLISECONDS,
         new ArrayBlockingQueue<Runnable>(taskQueueMaxSize),
         new DiscardOldestPolicy());
-    userModeTrigger = new UserModeTrigger(3, 15 * 1000);
+    userModeTrigger = new UserModeTrigger(2, 15 * 1000);
   }
 
   @Override
@@ -191,13 +191,13 @@ public class FrameProcessorImpl implements FrameProcessor {
     float eyeDistance = face.eyesDistance();
     PointF midPoint = new PointF();
     face.getMidPoint(midPoint);
-    RectF faceRect = new RectF((float) (midPoint.x - 1.2 * eyeDistance),
-        (float) (midPoint.y - 1.2 * eyeDistance),
-        (float) (midPoint.x + 1.2 * eyeDistance), midPoint.y
-            + (float) (eyeDistance * 1.59));
+    RectF faceRect = new RectF((float) (midPoint.x - 1.1 * eyeDistance),
+        (float) (midPoint.y - 1.1 * eyeDistance),
+        (float) (midPoint.x + 1.1 * eyeDistance), midPoint.y
+            + (float) (eyeDistance * 1.39));
     long faceArea = (int) faceRect.width() * (int) faceRect.height();
     long boundingBoxArea = width * height;
-    boolean faceCloseEnough = faceArea >= boundingBoxArea * 0.6;
+    boolean faceCloseEnough = faceArea >= boundingBoxArea * 0.39;
     return new RectF(0, 0, width, height).contains(faceRect) && faceCloseEnough;
   }
 

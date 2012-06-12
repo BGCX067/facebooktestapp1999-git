@@ -35,6 +35,13 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="LargeTextOnWhiteBG" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">90dp</item>
+        <item name="android:textColor">@color/normal_text_on_white_bg</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="normalButton" parent="@android:style/Widget.Button">
         <item name="android:textSize">25px</item>
         <item name="android:textColor">@color/normal_text</item>
@@ -49,12 +56,41 @@
         <item name="android:background">@drawable/button</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginBottom">15dp</item>
+    </style>
+
+    <style name="highlightedButtonOnWhiteBG" parent="@android:style/Widget.Button">
+        <item name="android:textSize">30px</item>
+        <item name="android:textColor">@color/normal_text</item>
+        <item name="android:background">@drawable/hightlight_button</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginBottom">15dp</item>
+    </style>
+
+    <style name="lowlightedButtonOnWhiteBG" parent="@android:style/Widget.Button">
+        <item name="android:textSize">30px</item>
+        <item name="android:textColor">@color/normal_text</item>
+        <item name="android:background">@drawable/lowlight_button</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginBottom">15dp</item>
     </style>
 
     <style name="debugButton">
         <item name="android:textSize">10px</item>
         <item name="android:textColor">@color/normal_text</item>
         <item name="android:background">@drawable/button</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">fill_parent</item>
+    </style>
+
+    <style name="debugText">
+        <item name="android:textSize">10px</item>
+        <item name="android:textColor">@color/normal_text</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">fill_parent</item>
     </style>

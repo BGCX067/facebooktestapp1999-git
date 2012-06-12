@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,12 +20,14 @@ public class UserViewImpl implements UserView {
   private final View view;
   private final ImageView profileImage;
   private final TextView name;
+  private final Button thatIsMe;
+  private final Button notMe;
   private final View confirmRoot;
   private final View unredeemableRoot;
   private final View redeemableRoot;
   private final View redeemingRoot;
 
-  public UserViewImpl(Context context, UserView.Presenter presenter,
+  public UserViewImpl(Context context, final UserView.Presenter presenter,
       OverlayView overlayView) {
     this.presenter = presenter;
     this.overlayView = overlayView;
@@ -37,12 +41,23 @@ public class UserViewImpl implements UserView {
     unredeemableRoot = view.findViewById(R.id.unredeemableRoot);
     redeemableRoot = view.findViewById(R.id.redeemableRoot);
     redeemingRoot = view.findViewById(R.id.redeemingRoot);
+    thatIsMe = (Button) view.findViewById(R.id.thatsMeButton);
+    notMe = (Button) view.findViewById(R.id.tryAgainButton);
     setFont(Typeface.createFromAsset(context.getAssets(), "GeosansLight.ttf"));
     presenter.setView(this);
+    notMe.setOnClickListener(new OnClickListener() {
+
+      @Override
+      public void onClick(View v) {
+        presenter.getOverlayPresenter().setToRecognitionView();
+      }
+    });
   }
 
   private void setFont(Typeface font) {
     name.setTypeface(font);
+    thatIsMe.setTypeface(font);
+    notMe.setTypeface(font);
   }
 
   @Override
