@@ -72,11 +72,24 @@ public class OverlayPresenterImpl extends Thread implements Presenter {
   @Override
   public void setToUserView() {
     view.setToUserView();
+    frameProcessor.setIdleMode();
   }
 
   @Override
   public void setUserPresenter(
       com.sausageking.ui.UserView.Presenter userPresenter) {
     this.userPresenter = userPresenter;
+  }
+
+  @Override
+  public void setToSignupView() {
+    view.setToSignupView();
+    frameProcessor.setIdleMode();
+  }
+
+  @Override
+  public void setToManualCheckinView() {
+    view.setToManualCheckinView();
+    frameProcessor.setIdleMode();
   }
 }

@@ -21,11 +21,19 @@ public interface OverlayView {
 
   void setToSignupView();
 
+  void setToManualCheckinView();
+
   void setToTraningView();
 
   ViewGroup getUserViewRoot();
 
   ViewGroup getScanningViewRoot();
+
+  ViewGroup getSignupViewRoot();
+
+  ViewGroup getManualCheckinViewRoot();
+
+  void showButtons(boolean visible);
 
   interface Presenter {
 
@@ -49,9 +57,12 @@ public interface OverlayView {
 
     void setToUserView();
 
+    void setToSignupView();
+
+    void setToManualCheckinView();
+
     void setUserPresenter(UserView.Presenter userPresenter);
 
   }
-
 
 }

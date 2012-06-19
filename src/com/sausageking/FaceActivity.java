@@ -21,6 +21,8 @@ import com.sausageking.ui.impl.CameraPreviewPresenterImpl;
 import com.sausageking.ui.impl.CameraPreviewViewImpl;
 import com.sausageking.ui.impl.OverlayPresenterImpl;
 import com.sausageking.ui.impl.OverlayViewImpl;
+import com.sausageking.ui.impl.SignupPresenterImpl;
+import com.sausageking.ui.impl.SignupViewImpl;
 import com.sausageking.ui.impl.UserPresenterImpl;
 import com.sausageking.ui.impl.UserViewImpl;
 
@@ -45,16 +47,16 @@ public class FaceActivity extends Activity {
     OverlayView.Presenter overlayPresenter = new OverlayPresenterImpl();
     OverlayView overlayView = new OverlayViewImpl(this,
         ((ViewGroup) findViewById(R.id.overlay)), overlayPresenter);
-
     UserView.Presenter userPresenter = new UserPresenterImpl(overlayPresenter);
-    UserView userView = new UserViewImpl(this, userPresenter, overlayView);
+    new UserViewImpl(this, userPresenter, overlayView);
+   
+    new SignupViewImpl(this, new SignupPresenterImpl(), overlayView);
 
     FrameProcessor frameProcessor = new FrameProcessorImpl(cameraManager,
         overlayPresenter, cameraPreviewPresenter, userPresenter, faceClient);
     cameraPreviewPresenter.addFrameProcessor(frameProcessor);
     CameraPreviewView cameraPreviewView = new CameraPreviewViewImpl(this,
         cameraPreviewPresenter);
-
     ((FrameLayout) findViewById(R.id.overlay)).addView(overlayView.toView());
     ((FrameLayout) findViewById(R.id.preview)).addView(cameraPreviewView
         .toView());

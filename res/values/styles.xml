@@ -7,6 +7,17 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="form" parent="@android:style/Widget.EditText">
+        <item name="android:textSize">35px</item>
+        <item name="android:textColor">@color/darker_text_on_white_bg</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:alpha"> 0.5</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+
     <style name="logoText" parent="@android:style/Widget.TextView">
         <item name="android:textSize">35px</item>
         <item name="android:textColor">@color/logo_text</item>
@@ -38,6 +49,13 @@
     <style name="LargeTextOnWhiteBG" parent="@android:style/Widget.TextView">
         <item name="android:textSize">90dp</item>
         <item name="android:textColor">@color/normal_text_on_white_bg</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="HighLightTextOnWhiteBG" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">60dp</item>
+        <item name="android:textColor">@color/highlight_text_on_white_bg</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textStyle">bold</item>
     </style>

@@ -50,7 +50,7 @@
                     style="@style/highlightedButtonOnWhiteBG"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="Get reward points!" />
+                    android:text="Earn reward points!" />
 
                 <Button
                     android:id="@+id/tryAgainButton"
@@ -64,8 +64,27 @@
                 android:id="@+id/unredeemableRoot"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
+                android:orientation="vertical"
                 android:visibility="gone"
                 android:weightSum="1" >
+
+                <TextView
+                    android:id="@+id/getPoints"
+                    style="@style/HighLightTextOnWhiteBG"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Just earned 1 point!" />
+
+                <ProgressBar
+                    android:id="@+id/pointProgress"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:max="10"
+                    android:progress="9" 
+                    android:layout_marginTop="30dp"
+                    />
             </LinearLayout>
 
             <LinearLayout

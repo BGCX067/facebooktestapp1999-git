@@ -7,6 +7,8 @@
     <color name="normal_text">#aeffffff</color>
     <color name="normal_text_on_white_bg">#59000000</color>
     <color name="darker_text_on_white_bg">#95000000</color>
+    <color name="highlight_text_on_white_bg">#59006400</color>
     <color name="logo_text">#aeff6600</color>
+    
 
 </resources>

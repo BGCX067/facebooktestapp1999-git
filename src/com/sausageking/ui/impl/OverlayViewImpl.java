@@ -24,6 +24,8 @@ public class OverlayViewImpl implements OverlayView {
   private final View view;
   private final Button saveLocalButton;
   private final Button trainNextFaceButton;
+  private final Button signupButton;
+  private final Button manualCheckinButton;
   private final EditText userIdToTrain;
   private final TextView result;
   private final Context context;
@@ -34,6 +36,8 @@ public class OverlayViewImpl implements OverlayView {
   private boolean scanLineMoving = false;
   private final ViewGroup userRoot;
   private final ViewGroup scanningRoot;
+  private final ViewGroup signupRoot;
+  private final ViewGroup manualCheckinRoot;
 
   public OverlayViewImpl(final Context context, ViewGroup root,
       final Presenter presenter) {
@@ -44,20 +48,25 @@ public class OverlayViewImpl implements OverlayView {
     setFont(view);
     saveLocalButton = (Button) view.findViewById(R.id.saveLocal);
     trainNextFaceButton = (Button) view.findViewById(R.id.trainNextFace);
+    signupButton = (Button) view.findViewById(R.id.firstTimeUserButton);
+    manualCheckinButton = (Button) view
+        .findViewById(R.id.checkinWithEmailButton);
     userIdToTrain = (EditText) view.findViewById(R.id.userIdToTrain);
     result = (TextView) view.findViewById(R.id.result);
     this.presenter = presenter;
     boundingBox = view.findViewById(R.id.boundingBox);
     userRoot = (ViewGroup) view.findViewById(R.id.userRoot);
     scanningRoot = (ViewGroup) view.findViewById(R.id.scanningRoot);
+    signupRoot = (ViewGroup) view.findViewById(R.id.signupRoot);
+    manualCheckinRoot = (ViewGroup) view.findViewById(R.id.manualCheckinRoot);
     scanLine = (ImageView) view.findViewById(R.id.scanLine);
     boardImage = (ImageView) view.findViewById(R.id.boardImage);
+    boardImage.setImageResource(R.drawable.sample_image);
     saveLocalButton.setOnClickListener(new View.OnClickListener() {
 
       @Override
       public void onClick(View v) {
         presenter.saveLocal();
-        // showScanLine();
       }
     });
     trainNextFaceButton.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +80,13 @@ public class OverlayViewImpl implements OverlayView {
         } else {
           setResult("Invalid user id");
         }
+      }
+    });
+    signupButton.setOnClickListener(new View.OnClickListener() {
+
+      @Override
+      public void onClick(View v) {
+        presenter.setToSignupView();
       }
     });
 
@@ -155,8 +171,11 @@ public class OverlayViewImpl implements OverlayView {
 
       @Override
       public void run() {
+        showButtons(true);
         getUserViewRoot().setVisibility(View.GONE);
         getScanningViewRoot().setVisibility(View.VISIBLE);
+        getManualCheckinViewRoot().setVisibility(View.GONE);
+        getSignupViewRoot().setVisibility(View.GONE);
       }
     });
 
@@ -167,20 +186,49 @@ public class OverlayViewImpl implements OverlayView {
     handler.post(new Runnable() {
       @Override
       public void run() {
+        showButtons(true);
         getUserViewRoot().setVisibility(View.VISIBLE);
         getScanningViewRoot().setVisibility(View.GONE);
+        getManualCheckinViewRoot().setVisibility(View.GONE);
+        getSignupViewRoot().setVisibility(View.GONE);
       }
     });
   }
 
   @Override
   public void setToSignupView() {
-    // TODO Auto-generated method stub
+
+    handler.post(new Runnable() {
+
+      @Override
+      public void run() {
+        showButtons(false);
+        getUserViewRoot().setVisibility(View.GONE);
+        getScanningViewRoot().setVisibility(View.GONE);
+        getManualCheckinViewRoot().setVisibility(View.GONE);
+        getSignupViewRoot().setVisibility(View.VISIBLE);
+      }
+    });
   }
 
   @Override
   public void setToTraningView() {
     // TODO Auto-generated method stub
+  }
+
+  @Override
+  public void setToManualCheckinView() {
+    handler.post(new Runnable() {
+
+      @Override
+      public void run() {
+        showButtons(false);
+        getUserViewRoot().setVisibility(View.GONE);
+        getScanningViewRoot().setVisibility(View.GONE);
+        getManualCheckinViewRoot().setVisibility(View.VISIBLE);
+        getSignupViewRoot().setVisibility(View.GONE);
+      }
+    });
   }
 
   @Override
@@ -191,6 +239,25 @@ public class OverlayViewImpl implements OverlayView {
   @Override
   public ViewGroup getScanningViewRoot() {
     return scanningRoot;
+  }
+
+  @Override
+  public ViewGroup getSignupViewRoot() {
+    return signupRoot;
+  }
+
+  @Override
+  public ViewGroup getManualCheckinViewRoot() {
+    return manualCheckinRoot;
+  }
+
+  @Override
+  public void showButtons(final boolean visible) {
+
+    int visibility = visible ? View.VISIBLE : View.GONE;
+    signupButton.setVisibility(visibility);
+    manualCheckinButton.setVisibility(visibility);
+
   }
 
 }

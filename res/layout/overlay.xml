@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_marginLeft="10dp"
-                android:text="REWARD:)" />
+                android:text="face checkin" />
 
             <TextView
                 android:id="@+id/rewardText"
@@ -39,12 +39,28 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:gravity="center"
-                android:text="5 check-ins for a free beer" />
+                android:text="5 check-ins for free beer" />
         </FrameLayout>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/userRoot"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="0.7"
+        android:visibility="gone" >
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/signupRoot"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="0.7"
+        android:visibility="gone" >
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/manualCheckinRoot"
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_weight="0.7"
@@ -91,8 +107,7 @@
                     android:layout_height="fill_parent"
                     android:adjustViewBounds="true"
                     android:alpha="0.2"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/sample_image" />
+                    android:scaleType="centerInside" />
             </LinearLayout>
         </FrameLayout>
 
@@ -156,8 +171,8 @@
 
                 <TextView
                     android:id="@+id/result"
-                    style="@style/debugText" 
-                    android:visibility="visible"/>
+                    style="@style/debugText"
+                    android:visibility="visible" />
             </LinearLayout>
         </FrameLayout>
     </LinearLayout>
